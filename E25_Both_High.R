@@ -1,11 +1,11 @@
 filepath="~/Validation/Outputs"
 setwd(filepath)
 
-install.packages("NLMR")
-install.packages("raster")
-install.packages("sp")
-install.packages("plyr")
-install.packages("remotes")
+install.packages("NLMR",dependencies = TRUE, INSTALL_opts = '--no-lock')
+install.packages("raster",dependencies = TRUE, INSTALL_opts = '--no-lock')
+install.packages("sp",dependencies = TRUE, INSTALL_opts = '--no-lock')
+install.packages("plyr",dependencies = TRUE, INSTALL_opts = '--no-lock')
+install.packages("remotes",dependencies = TRUE, INSTALL_opts = '--no-lock')
 
 library(NLMR)
 library(raster)
