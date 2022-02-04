@@ -3,13 +3,14 @@ setwd(filepath)
 
 
 ############## create Spatial Grid of Environment Types ####################
+dm <- 299
+
 set.seed(100)
 Habs<-read.csv("Hab_High.csv")
 Habs2 <- unlist(Habs)
 Habs3 <- unname(Habs2)
 Mat.S.H <- matrix(Habs3,nrow=dm,ncol=dm)
 
-dm <- 299
 
 ################################## Species Fitness + Habitat Type ###################################
 
@@ -101,13 +102,8 @@ mat.torus <- function(Matrix,Rad,xcord,ycord){      # Torus of Space
 S.list <- seq(1:S)
 TimeSteps <- 50000
 
-r2 <- raster(xmn = 0, xmx = dm, ymn = 0, ymx = dm, nrows =dm, ncols = dm)
 dd <- sample(1:S, dm*dm, replace = TRUE)
-r2[] <- dd
-plot(r2)
-
 Mat.S <- matrix(dd,nrow=dm,ncol=dm)
-hist(Mat.S,breaks=S)
 
 df.Props                <- data.frame( matrix(NA,ncol=S+1,nrow=TimeSteps) )
 df.Props[,1]            <- seq(1:TimeSteps)
