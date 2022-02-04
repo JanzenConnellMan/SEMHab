@@ -1,49 +1,14 @@
-filepath="~/Validation/Outputs"
+filepath="~/Validation/SEMHab"
 setwd(filepath)
 
-install.packages("NLMR",dependencies = TRUE, INSTALL_opts = '--no-lock')
-install.packages("raster",dependencies = TRUE, INSTALL_opts = '--no-lock')
-install.packages("sp",dependencies = TRUE, INSTALL_opts = '--no-lock')
-install.packages("plyr",dependencies = TRUE, INSTALL_opts = '--no-lock')
-install.packages("remotes",dependencies = TRUE, INSTALL_opts = '--no-lock')
-
-library(NLMR)
-library(raster)
-library(sp)
-library(plyr)
-library(remotes)
 
 ############## create Spatial Grid of Environment Types ####################
-
 set.seed(100)
+Habs<-read.csv("Hab_High.csv")
+Habs2 <- unlist(Habs)
+Habs3 <- unname(Habs2)
+Mat.S.H <- matrix(Habs3,nrow=dm,ncol=dm)
 
-dm <- 300
-r <- nlm_mpd(dm,dm, rand_dev = 1,  roughness = .5,
-             torus = T, rescale = TRUE,verbose = F)
-
-Mat.S.H <- t(matrix(as.vector(r),nrow=nrow(r),ncol=ncol(r)))
-values <- (as.vector(Mat.S.H))
-CDF.Hist <- hist(Mat.S.H,breaks=length(Mat.S.H))
-empirical_cumulative_distribution  <- cumsum(CDF.Hist$counts)/length(Mat.S.H)
-uniformize <- function(x) {
-  ans_x <- x
-  for (idx in seq(1,length(x))){
-    max_idx <- max(which(CDF.Hist$mids < x[idx]))
-    ans_x[idx] <- empirical_cumulative_distribution[max_idx]
-  }
-  return(ans_x)
-}
-uniform2 <- uniformize(values)
-uniform2 <- 100*uniform2
-NAs <- which(is.na(uniform2))
-for(nn in 1:length(NAs)){
-  
-  uniform2[NAs[nn]] <- runif(0,100,n=1)
-} 
-r[] <- uniform2
-Mat.S.H <- t(matrix(as.vector(r),nrow=nrow(r),ncol=ncol(r)))
-#plot(r,     col = terrain.colors(8))
-#plot(r,     col = rainbow(20))
 
 dm <- 299
 
@@ -207,6 +172,9 @@ for(mm in 1:TimeSteps){
 
 
 df.PropsM <- as.matrix(df.Props)
+
+filepath="~/Validation/Outputs"
+setwd(filepath)
 
 write.csv(df.PropsM,"TS_E1_HIGH_HAB.csv",quote=F,row.names=F)
 write.csv(Mat.S,"DIST_E1_HIGH_HAB.csv",quote=F,row.names=F)
