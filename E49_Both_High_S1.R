@@ -6,12 +6,10 @@ setwd(filepath)
 dm <- 499
 
 set.seed(100)
-Habs<-read.csv("Hab_Med.csv")
+Habs<-read.csv("Hab_MedHigh.csv")
 Habs2 <- unlist(Habs)
 Habs3 <- unname(Habs2)
-Habs3 <- sample(Habs3)
 Mat.S.H <- matrix(Habs3,nrow=dm,ncol=dm)
-
 
 ################################## Species Fitness + Habitat Type ###################################
 
@@ -170,12 +168,12 @@ for(mm in 1:TimeSteps){
 df.PropsM <- as.matrix(df.Props)
 
 
-filepath="~/Validation/Outputs"
+filepath="~/Validation/Outputs2"
 setwd(filepath)
 
 
-write.csv(df.PropsM,"TS_E49_RAND_BOTH_S1.csv",quote=F,row.names=F)
-write.csv(Mat.S,"DIST_E49_RAND_BOTH_S1.csv",quote=F,row.names=F)
+write.csv(df.PropsM,"TS_E49_MEDHIGH_BOTH_S1.csv",quote=F,row.names=F)
+write.csv(Mat.S,"DIST_E49_MEDHIGH_BOTH_S1.csv",quote=F,row.names=F)
 
 
 
