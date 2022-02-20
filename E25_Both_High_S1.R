@@ -6,7 +6,7 @@ setwd(filepath)
 dm <- 499
 
 set.seed(100)
-Habs<-read.csv("Hab_MedHigh.csv")
+Habs<-read.csv("Hab_MedLow.csv")
 Habs2 <- unlist(Habs)
 Habs3 <- unname(Habs2)
 Mat.S.H <- matrix(Habs3,nrow=dm,ncol=dm)
@@ -171,8 +171,8 @@ df.PropsM <- as.matrix(df.Props)
 filepath="~/Validation/Outputs2"
 setwd(filepath)
 
-write.csv(df.PropsM,"TS_E25_MEDHIGH_BOTH_S1.csv",quote=F,row.names=F)
-write.csv(Mat.S,"DIST_E25_MEDHIGH_BOTH_S1.csv",quote=F,row.names=F)
+write.csv(df.PropsM,"TS_E25_MEDLOW_BOTH_S1.csv",quote=F,row.names=F)
+write.csv(Mat.S,"DIST_E25_MEDLOW_BOTH_S1.csv",quote=F,row.names=F)
 
 
 
